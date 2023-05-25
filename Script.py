@@ -4,8 +4,6 @@ import numpy as np
 import re
 
 from keras.layers import TextVectorization
-# from tensorflow.keras.models import load_model
-# from tensorflow.keras.layers.experimental.preprocessing import TextVectorization
 from tensorflow.python.keras.saving.save import load_model
 from tensorflow.keras.optimizers import Adam
 from tensorflow.python.keras import metrics
@@ -39,9 +37,6 @@ ner_model = torch.load('Model_3.pth', map_location=device)
 # Load the saved tokenizer
 tokenizer = torch.load('Our_Token.pth', map_location=device)
 
-# Load the saved keras model
-# category_model = load_model('model_text_clf_tokenizer70.h5', custom_objects={'Adam': Adam})
-# category_model = tf.keras.models.load_model('model_text_clf_tokenizer80.h5', custom_objects={"Adam": Adam, 'F1Score': F1Score})
 
 category_model = tf.keras.models.load_model('model_text_clf_tokenizer80.h5', custom_objects={'F1Score': F1Score})
 
