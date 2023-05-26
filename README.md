@@ -33,7 +33,8 @@ Post training, the model was evaluated on a separate test set. We computed the a
 - Category 6 (Mobility (transport)): Accuracy of 96.30%
 
 ## How to run
-#### Input: a sentece , Output: nouns, TF-IDF text classification , LaBSE test classification of the input sentence.
+#### Input: a sentece 
+#### Output: nouns, TF-IDF text classification , LaBSE test classification of the input sentence.
     ```bash
     python Script.py sentence.txt
     ```
