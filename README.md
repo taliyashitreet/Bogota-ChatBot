@@ -39,7 +39,7 @@ Post training, the model was evaluated on a separate test set. We computed the a
     ```
 * Note that you have the necessary files for running in files_zip except the file Model_3.pth.
   sentence.txt should contain the sentence for which you want a prediction.
-  Please ensure that you have the necessary Python environment and packages installed for the script to run successfully.
+* Please ensure that you have the necessary Python environment and packages installed for the script to run successfully.
 
 ## Conclusion
 This project exhibits the effectiveness of deep learning in text classification tasks. The model shows promising performance in classifying text into six categories. Future work can include tuning the model for better performance, adding more categories, or applying the model to different text classification tasks.
