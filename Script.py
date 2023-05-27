@@ -158,14 +158,16 @@ def predict_category_all_sentence(sentence:str):
             category += index_category.get(i)
             counter += 1
     
-    return ', '.join(category)
+    return category
 
 def predict_category_concatenated_nouns(nouns:list ,test_sentence:str):
 
     TRESHOLD = 0.27
 
+    conc_str = ' '.join(nouns)
+
     # Encoding the messages and the categories sentences.
-    messages_sentences = tf.constant([nouns])
+    messages_sentences = tf.constant([conc_str])
     categories_sentences = tf.constant(["Environment and climate resilience", "Mobility (transport)", "Local identity", "Future of work", "Land use"])
 
     messages_embeds = model(messages_sentences)
@@ -178,18 +180,20 @@ def predict_category_concatenated_nouns(nouns:list ,test_sentence:str):
     counter = 0
     for value in result: # result = [[3432 34234 234 324234 23]]
       for i,v in enumerate(value): # for each number in the list
-        if float(v) > TRESHOLD: # needs to be change accorindg to the result from ChatGPT
+        if float(v) > TRESHOLD:
           if counter > 0:
             category += ', ' + index_category.get(i)
           else: 
             category += index_category.get(i)
             counter += 1
 
-    return ', '.join(category)
+    if category == '':
+      return 'other'
+    return category
 
 def predict_category_avg_category_nouns(nouns: list,test_sentence:str):
   
-    TRESHOLD = 0.25
+    TRESHOLD = 0.29
 
     sum_result_column = [0 for i in range(5)]
 
@@ -208,20 +212,23 @@ def predict_category_avg_category_nouns(nouns: list,test_sentence:str):
       for value in result: # result = [[3432 34234 234 324234 23]]
         for i,v in enumerate(value): # for each number in the list
           sum_result_column[i] += float(v)
-    
-      sum_result_column = [num / 5 for num in sum_result_column] # calac avg
 
-      category = ''
-      counter = 0
-      for i,value in enumerate(sum_result_column):
-        if float(value) > TRESHOLD:
-          if counter > 0:
-            category += ', ' + index_category.get(i)
-          else: 
-            category += index_category.get(i)
-            counter += 1
       
-      return ', '.join(category)
+    sum_result_column = [num / 5 for num in sum_result_column] # calac avg
+
+    category = ''
+    counter = 0
+    for i,value in enumerate(sum_result_column):
+      if float(value) > TRESHOLD:
+        if counter > 0:
+          category += ', ' + index_category.get(i)
+        else: 
+          category += index_category.get(i)
+          counter += 1
+      
+    if category == '':
+      return 'other'
+    return category
 
 def process_file(input_file_path):
     with open(input_file_path, 'r') as file:
@@ -234,9 +241,8 @@ def process_file(input_file_path):
 
     # unsupervied
     categories_sent = predict_category_all_sentence(test_sentence)
-    categories_conc_nouns = predict_category_concatenated_nouns(', '.join(nouns),test_sentence)
-    categories_nouns_avg = predict_category_avg_category_nouns(', '.join(nouns),test_sentence)
-
+    categories_conc_nouns = predict_category_concatenated_nouns(nouns,test_sentence)
+    categories_nouns_avg = predict_category_avg_category_nouns(nouns,test_sentence)
     with open(input_file_path, 'a') as file:
         file.write("\nThe sentence's nouns are: " + ', '.join(nouns) + "\n")
         file.write("The categories of this sentence according to TF-IDF: " + ', '.join(categories_TFIDF) + "\n")
@@ -244,6 +250,7 @@ def process_file(input_file_path):
         file.write("The categories of this sentence according to unsuper-sentence: " + categories_sent + "\n")
         file.write("The categories of this sentence according to unsuper-conc-nouns: " + categories_conc_nouns + "\n")
         file.write("The categories of this sentence according to unsuper-nouns-avg: " + categories_nouns_avg + "\n")
+
 
 
 
