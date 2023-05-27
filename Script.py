@@ -157,7 +157,9 @@ def predict_category_all_sentence(sentence:str):
           else: 
             category += index_category.get(i)
             counter += 1
-    
+            
+    if category == '':
+        return 'Other'
     return category
 
 def predict_category_concatenated_nouns(nouns:list ,test_sentence:str):
