@@ -216,7 +216,7 @@ def predict_category_avg_category_nouns(nouns: list,test_sentence:str):
           sum_result_column[i] += float(v)
 
       
-    sum_result_column = [num / 5 for num in sum_result_column] # calac avg
+    sum_result_column = [num / len(nouns) for num in sum_result_column] # calac avg
 
     category = ''
     counter = 0
