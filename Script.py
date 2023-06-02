@@ -195,7 +195,7 @@ def predict_category_concatenated_nouns(nouns:list ,test_sentence:str):
 
 def predict_category_avg_category_nouns(nouns: list,test_sentence:str):
   
-    TRESHOLD = 0.25
+    TRESHOLD = 0.29
 
     sum_result_column = [0 for i in range(5)]
 
