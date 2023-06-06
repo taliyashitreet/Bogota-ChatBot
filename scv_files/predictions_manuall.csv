@@ -1,0 +1,73 @@
+,Sentence,Predicted Labels,True Labels,Verification
+295,"""The building should have spaces for the students to interact and hang out in their free time. Also it would be good to work with visual interactions as well. In addition i would prefer an industrial architecture.""",['Land use' 'Future of work'],['Land use'],V
+331,"""a beautiful courtyard is also good""",['Future of work'],['Local identity'],V
+108,"""Also, I know the Garching campus has a very fast and cool slide and I would love it if we get an even faster slide here in the coty centre as well""",['Land use' 'Future of work'],['Local identity'],V
+209,"""I think that a good architecture school should have a big tables and a lot of light, It should look like an atelier""",['Local identity' 'Future of work'],['Land use' 'Local identity'],V
+300,"""comfortable spaces and facilities for both students and staff so that they can relax when not working""",['Land use' 'Future of work'],['Future of work'],V
+173,"""Are there any alternative materials?""",['other'],['Land use'],V
+316,"""hello""",['other'],['other'],V
+330,"""like trees""",['Land use' 'Environment and climate resilience'],['Environment and climate resilience'],V
+95,"""I think this is a great opportunity address some of the issues the main campus has.""",['Future of work'],['Future of work'],V
+297,"""it needs 4 floors but the scale of the excisting building works well in the urban context""",['Land use' 'Future of work'],['Land use'],V
+35,"""west-east""",['other'],['Land use'],X
+174,"""Are there examples of a modern half timbered house?""",['Local identity'],['Local identity'],V
+212,"""Can you tell me some interesting reference for the design?""",['other'],['Future of work'],V
+327,"""and open to the block """,['Future of work'],['Land use'],X
+218,"""who have you worked with in the past?""",['Future of work'],['other'],V
+281,"""What measurement or technology will be used for energy-saving?""",['Future of work'],['Environment and climate resilience'],X
+96,"""As a student, I honestly do not feel welcomed in most of the architecture faculty's buildings. There are very limited spaces to just hang out inbetween the lectures. I think we need a lounge space with some little ammenities like microwaves""",['Land use' 'Future of work'],['Local identity'],X
+237,"""the building should have large lecture rooms for those lectures with many students registered""",['Land use' 'Future of work'],['Land use'],V
+197,"""Are they giving interesting ideas?""",['other'],['other'],V
+343,"""The building should be more open for the society.""",['Land use' 'Environment and climate resilience' 'Future of work'],['Environment and climate resilience'],V
+214,"""Can you tell a good building from a bad one?""",['other'],['other'],V
+21,"""Can we make the building more sustainable?""",['Environment and climate resilience'],['Environment and climate resilience'],V
+314,"""What are you doing tonight""",['other'],['other'],V
+210,"""The collective space should be the core of the building, sharing ideas and networking are keypoints.""",['Future of work'],['Land use'],V
+171,"""How does the Sinnstiftung look like?""",['Local identity' 'Future of work'],['Local identity'],V
+247,"""Do you know the budget?""",['other'],['other'],V
+85,"""Who were your teachers?""",['other'],['other'],V
+181,"""It can have a public plaza in the front.""",['Land use' 'Future of work'],['Land use'],V
+66,"""Do you have any thoughts about how the building can have a positive impact?""",['other'],['Environment and climate resilience'],V
+155,"""how to build a half-timbered house""",['Land use'],['Land use' 'Local identity'],V
+284,"""Will the solar panel be only on the roof? How many space is there?""",['Land use' 'Future of work'],['Environment and climate resilience'],X
+41,"""minimalistic architecture""",['Local identity'],['Local identity'],V
+265,"""Have you thought about making this building clima-neutral?""",['Future of work'],['Environment and climate resilience'],X
+257,"""For example?""",['other'],['other'],V
+168,"""Can I 3d print infra lightweight concrete?""",['Future of work'],['Land use' 'Future of work'],V
+100,"""Another thing that has always bothered me with the other architecture buildings is that they do not feel and look like a design school""",['Local identity' 'Future of work'],['Local identity'],V
+185,"""Such as bridges""",['other'],['Land use' 'Mobility (transport)'],V
+201,"""More natural light in the interior space. Facilities and features for students, such as selling automats with drinks and food. Free drink water. Spaces to meet in group""",['Future of work'],['Land use'],X
+176,"""I'm sorry that I don't have so much idea.""",['other'],['other'],V
+152,"""We should let spaces be big but able to separate to provide more flexibility""",['Land use' 'Future of work'],['Land use'],V
+116,"""spaces""",['other'],['Land use' 'Environment and climate resilience'],V
+246,"""How long will it take_""",['other'],['other'],V
+231,"""Great Idea!""",['other'],['other'],V
+291,"""How does it cool the building? Is it central air-conditioner?""",['Land use' 'Future of work'],['Environment and climate resilience'],X
+10,"""where did you learn about architecture?""",['other' 'Local identity'],['Local identity'],V
+269,"""Stundentrooms should be included and worshopspaces are a necessity """,['Future of work'],['Land use'],V
+338,"""and a lot of students can stay inside""",['Environment and climate resilience' 'Future of work'],['Land use' 'Future of work'],V
+260,"""Oh nice, I didnt know it was you""",['other'],['other'],V
+337,"""and a if it possible the teachers can have chat with us """,['Future of work'],['Future of work'],V
+105,"""I would love for it to be built out of timber, because of its ecological properties""",['Future of work'],['Environment and climate resilience'],X
+251,"""Which rooms will be there?""",['Environment and climate resilience' 'Future of work'],['Land use'],X
+111,"""What do you think are the values of the university?""",['other'],['other'],V
+310,"""What do you think about my inp dear zaha where did you learn architectureut""",['other'],['other'],V
+283,"""How much percentage of electricity comsume can those solar panels cover?""",['Future of work'],['Environment and climate resilience'],V
+198,"""Do you use every idea?""",['other'],['other'],V
+29,"""Give me some examples""",['other'],['Future of work'],V
+347,"""Can we have a garden?""",['Land use' 'Environment and climate resilience'],['Environment and climate resilience'],V
+20,"""Roof garden will be perfect place to have a rest.""",['Land use' 'Future of work'],['Environment and climate resilience' 'Local identity'],V
+261,"""Will the new building be similar to that one?""",['Future of work'],['other'],X
+342,"""The building should be more open for the society.""",['Land use' 'Environment and climate resilience' 'Future of work'],['Local identity'],V
+351,"""The building should have several spaces for group works, especially for create models. It's important to stimulate the cooperation between students of different years and courses creating rooms dedicated to the group work more similar to intern squares than classes. """,['Land use' 'Environment and climate resilience' 'Future of work'],['Local identity'],V
+315,"""How about we meet later for a beer""",['Future of work'],['other'],X
+150,"""Workshops to take care of the outdoor space could be added""",['Future of work'],['Land use' 'Environment and climate resilience'],V
+11,"""where exatcly?""",['other'],['Local identity'],V
+42,"""it should be climate neutral or even positive. Can we provide a good natural ventilation?""",['Future of work'],['Environment and climate resilience'],X
+143,"""I think we need working spaces where students can work together""",['Land use'],['Future of work'],V
+184,"""It can also have connections with other buildings.""",['Local identity' 'Future of work'],['Land use'],V
+170,"""What aggregate should I use for the infra lightweight concrete？""",['Land use' 'Future of work'],['Land use'],V
+43,"""a big entrance hall with a meeting point for students""",['Land use' 'Future of work'],['Future of work'],V
+188,"""There should be a makerspace for model making.""",['Land use' 'Environment and climate resilience' 'Future of work'],['Land use'],V
+195,"""But it can be a very challenging goal to achieve.""",['Land use'],['other'],X
+53,"""Where will the building be located?""",['Land use' 'Future of work'],['Mobility (transport)'],V
