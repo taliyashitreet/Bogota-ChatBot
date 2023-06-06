@@ -39,7 +39,7 @@ Post training, the model was evaluated on a separate test set. We computed the a
     python Script.py sentence.txt
     ```
 ##### Note 
-* you have all the necessary files for running in files_zip except the file Model_3.pth.
+* you have all the necessary files for running in filesForScript except the file Model_3.pth.
 * take the file Model_3.pth from here: https://drive.google.com/drive/folders/1d1c4Ml87MoWeXg1kcYK9QzsO-EbAqUCc
 * sentence.txt should contain the sentence for which you want a prediction.
 * Please ensure that you have the necessary Python environment and packages installed for the script to run successfully.
