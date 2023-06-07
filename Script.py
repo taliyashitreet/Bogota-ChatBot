@@ -63,6 +63,124 @@ tag_values = ['WP', 'VBG', 'RRB', 'IN', 'JJ', 'PDT', 'NNPS', 'VBZ', 'RB', 'VBD',
               'JJR', 'NNP', 'VBN', 'CD', 'NNS', 'DT', 'VB', 'POS', 'WDT', 'MD', '$', 'RP', ',', 'PRP', 'VBP', 'NN', ':',
               'PRP$', 'RBS', 'UH', 'WRB', 'WP$', '``', 'RBR', ';', 'TO', 'PAD']
 
+# For the unsupervised method
+
+# Loading models from tfhub.dev
+encoder = hub.KerasLayer("https://tfhub.dev/jeongukjae/smaller_LaBSE_15lang/1")
+preprocessor = hub.KerasLayer("https://tfhub.dev/jeongukjae/smaller_LaBSE_15lang_preprocess/1")
+
+# Constructing model to encode texts into high-dimensional vectors
+sentences = tf.keras.layers.Input(shape=(), dtype=tf.string, name="sentences")
+encoder_inputs = preprocessor(sentences)
+sentence_representation = encoder(encoder_inputs)["pooled_output"]
+normalized_sentence_representation = tf.nn.l2_normalize(sentence_representation, axis=-1)  # for cosine similarity
+model = tf.keras.Model(sentences, normalized_sentence_representation)
+
+
+index_category = {0:'Environment and climate resilience',1:'Mobility (transport)',2:'Local identity',3:'Future of work',4:'Land use'}
+
+
+def predict_category_all_sentence(sentence: str):
+    TRESHOLD = 0.25
+
+    # Encoding the messages and the categories sentences.
+    messages_sentences = tf.constant([sentence])
+    categories_sentences = tf.constant(
+        ["Environment and climate resilience", "Mobility (transport)", "Local identity", "Future of work", "Land use"])
+
+    messages_embeds = model(messages_sentences)
+    categories_embeds = model(categories_sentences)
+
+    # Messages-categories similarity
+    result = tf.tensordot(messages_embeds, categories_embeds, axes=[[1], [1]])
+
+    category = ''
+    counter = 0
+    for value in result:  # result = [[3432 34234 234 324234 23]]
+        for i, v in enumerate(value):  # for each number in the list
+            if float(v) > TRESHOLD:  # needs to be change accorindg to the result from ChatGPT
+                if counter > 0:
+                    category += ', ' + index_category.get(i)
+                else:
+                    category += index_category.get(i)
+                    counter += 1
+
+    if category == '':
+        return 'Other'
+    return category
+
+
+def predict_category_concatenated_nouns(nouns: list, test_sentence: str):
+    TRESHOLD = 0.27
+
+    conc_str = ' '.join(nouns)
+
+    # Encoding the messages and the categories sentences.
+    messages_sentences = tf.constant([conc_str])
+    categories_sentences = tf.constant(
+        ["Environment and climate resilience", "Mobility (transport)", "Local identity", "Future of work", "Land use"])
+
+    messages_embeds = model(messages_sentences)
+    categories_embeds = model(categories_sentences)
+
+    # Messages-categories similarity
+    result = tf.tensordot(messages_embeds, categories_embeds, axes=[[1], [1]])
+
+    category = ''
+    counter = 0
+    for value in result:  # result = [[3432 34234 234 324234 23]]
+        for i, v in enumerate(value):  # for each number in the list
+            if float(v) > TRESHOLD:
+                if counter > 0:
+                    category += ', ' + index_category.get(i)
+                else:
+                    category += index_category.get(i)
+                    counter += 1
+
+    if category == '':
+        return 'Other'
+    return category
+
+
+def predict_category_avg_category_nouns(nouns: list, test_sentence: str):
+    TRESHOLD = 0.25
+
+    sum_result_column = [0 for i in range(5)]
+
+    for noun in nouns:
+
+        # Encoding the messages and the categories sentences.
+        messages_sentences = tf.constant([noun])
+        categories_sentences = tf.constant(
+            ["Environment and climate resilience", "Mobility (transport)", "Local identity", "Future of work",
+             "Land use"])
+
+        messages_embeds = model(messages_sentences)
+        categories_embeds = model(categories_sentences)
+
+        # Messages-categories similarity
+        result = tf.tensordot(messages_embeds, categories_embeds, axes=[[1], [1]])
+
+        for value in result:  # result = [[3432 34234 234 324234 23]]
+            for i, v in enumerate(value):  # for each number in the list
+                sum_result_column[i] += float(v)
+
+    sum_result_column = [num / 5 for num in sum_result_column]  # calac avg
+
+    category = ''
+    counter = 0
+    for i, value in enumerate(sum_result_column):
+        if float(value) > TRESHOLD:
+            if counter > 0:
+                category += ', ' + index_category.get(i)
+            else:
+                category += index_category.get(i)
+                counter += 1
+
+    if category == '':
+        return 'Other'
+    return category
+
 
 def test_model(test_sentence):
     tokenized_sentence = tokenizer.encode(test_sentence)
@@ -127,21 +245,27 @@ def predict_category_bert(sentence):
 
 
 
-
-
-
 def process_file(input_file_path):
     with open(input_file_path, 'r') as file:
         test_sentence = file.read()
     nouns = test_model(test_sentence)
+    
     categories_TFIDF = predict_TFIDF(test_sentence)
     categories_BERT = predict_category_bert(test_sentence)
+
+    # unsupervied
+    categories_sent = predict_category_all_sentence(test_sentence)
+    categories_conc_nouns = predict_category_concatenated_nouns(nouns, test_sentence)
+    categories_nouns_avg = predict_category_avg_category_nouns(nouns, test_sentence)
+
     print("The categories of this sentence according to BERT: " + ', '.join(categories_BERT))
     with open(input_file_path, 'a') as file:
         file.write("\nThe sentence's nouns are: " + ', '.join(nouns) + "\n")
         file.write("The categories of this sentence according to TF-IDF: " + ', '.join(categories_TFIDF) + "\n")
         file.write("The categories of this sentence according to BERT: " + ', '.join(categories_BERT) + "\n")
-
+        file.write("The categories of this sentence according to unsuper-sentence: " + categories_sent + "\n")
+        file.write("The categories of this sentence according to unsuper-conc-nouns: " + categories_conc_nouns + "\n")
+        file.write("The categories of this sentence according to unsuper-nouns-avg: " + categories_nouns_avg + "\n")
 
 input_file_path = sys.argv[1]
 process_file(input_file_path)
